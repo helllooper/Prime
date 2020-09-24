@@ -1,0 +1,21 @@
+<% include partials/header%>
+
+<div id="articles" class="container">
+    <h1><%= article.title %></h1>
+    <p class="border-bottom border-dark pb-3">By <%= article.author %></p>
+    <div class="row border-bottom border-dark pb-3">
+            <div class="col-md-6 order-md-1">
+                <img src="<%= article.image %>" class="img-fluid">
+            </div>
+            <div class="col-md-6 order-md-0">
+                <h4><%= article.body %></h4>
+            </div> 
+        </div> 
+        <% if(currentUser){ %>
+            <form action="/articles/<%= article._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-lg mt-3">DELETE</button>
+            </form>
+        <% } %>  
+</div>
+
+<% include partials/footer%>

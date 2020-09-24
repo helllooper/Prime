@@ -1,0 +1,20 @@
+<% include partials/header %>
+
+<div id="register" class="continer-fluid">
+    <div id="signup">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-dark">LOG IN</button>
+            <a href="/login/email" class="d-block mt-2">Forgot password</a>            
+        </form>
+    </div>
+</div>
+    
+
+
+<% include partials/footer %>

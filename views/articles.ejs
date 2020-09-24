@@ -1,0 +1,20 @@
+<% include partials/header%>
+<div id="articles" class="container">
+    
+      <% articles.forEach(function(article){%>
+        <div class="mb-5 row">
+          <div class="col-md-8">
+            <h4><a href="#"><%= article.title %></a></h4>
+            <span><%= article.date.toDateString() %></span>
+            <p><%= article.body.substring(0 ,800) %></p>
+            <a href="articles/<%= article._id %>" class="btn btn-dark">Read more</a>
+          </div>
+          <div class="col-12 col-md-4"><img src="<%= article.image %>" class="img-fluid img-thumbnail"></div>
+        </div>
+      <% }) %>
+      <% if (currentUser){%>
+      <a href="/articles/new" class="btn btn-dark">Add new article</a>
+      <% } %>
+     
+  </div>
+<% include partials/footer%>

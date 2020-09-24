@@ -1,0 +1,192 @@
+<% include partials/header%>
+    <!-- portion1  -->
+    <div class="position-relative container-fluid">
+            <div id="overlay"></div>
+              <div class="row">
+                    <div class="bgimg" id="first-image">
+                            <% if (offer && offer.switch === "on"){%>
+                            <div id="wHours" class="wDisplay col-md-4 d-flex justify-content-center p-3">
+                                <div>
+                                    <i class="far fa-clock"></i>
+                                    <h1>Special Offer</h1>
+                                    <p><%= offer.text %></p>
+                                    <p>Subscribe for more upcoming offers</p>
+                                    <form action="/subscribe" method="POST">
+                                      <div class="form-group">
+                                          <input type="email" name="email" class="form-control" placeholder="Email">
+                                          <button type="submit" class="btn btn-primary mt-2">Subscribe</button>
+                                      </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            <% } %>
+                    </div>
+              </div>
+      </div>
+
+      <div id="portion2" class="container-fluid">
+         <div class="row">
+              <div class="col-md-6">
+                      <h5 class="mt-5 list">WHAT WE DO</h5>
+                      <h1 class="mb-2 list">Clinic Service</h1>
+                      <p class="list">
+                        Welcome to Prime Dental Care Clinic.Our mission is to deliver the highest quality, unprecedented comfort and service.
+                        We discuss with our patients the available options and help them choose the most appropiate treatment based on their individual needs and goals.
+                      </p>
+                       <form action="/about">
+                        <button type="submit" class="btn btn-primary list">Learn more</button>
+                      </form>
+              </div>
+              <div class="col-md-6">
+                <iframe id="video" class="mt-3" src="https://www.youtube.com/embed/46dzfuv81jQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+         </div>
+        </div>
+
+        <hr>
+
+        <!-- <div id="portion3" class="container-fluid text-center mt-5">
+           <div class="text-center"><i class="fas fa-laptop"></i></div>
+           <h3 class="text-center font-weight-bold pb-2 mb-3 mt-2">Our Equipments</h3>
+           <div class="row">
+                   <div class="col-md-3 mb-5">
+                        <div class="card equip">
+                                <img src="images/clinic_01.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                   <h5 class="card-text">Digital Control Center</h5>
+                                </div>
+                        </div>   
+                   </div>
+                   <div class="col-md-3 mb-5">
+                        <div class="card equip">
+                                <img src="images/clinic_01.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                   <h5 class="card-text">Digital Control Center</h5>
+                                </div>
+                        </div>   
+                   </div>
+                   <div class="col-md-3 mb-5">
+                        <div class="card equip">
+                                <img src="images/clinic_01.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                   <h5 class="card-text">Digital Control Center</h5>
+                                </div>
+                        </div> 
+                   </div>
+                   <div class="col-md-3 mb-5">
+                        <div class="card equip">
+                                <img src="images/clinic_01.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                   <h5 class="card-text">Digital Control Center</h5>
+                                </div>
+                        </div> 
+                   </div>
+           </div>
+        </div> -->
+
+        <div id="portion4" class="container-fluid p-0">
+            <div id="overlay2"></div>
+            <div class="row bgimg m-0 d-flex align-items-center" id="second-image">
+                        <div class="book col-md-4 list3 offset-md-1">
+                            <i class="mb-3 mt-5 fas fa-clipboard-list"></i>
+                            <h3 class="mb-5 font-weight-bold">Book an Appointment</h3>
+                            <p>Now you can book an appointment online.Just fill the form and we will call you.Also you can choose the doctor you want to visit.</p>
+                        </div>
+                        <div class="book col-md-6 offset-md-1 list3">
+                            <form id="book-form" class="mt-5 p-3" action="/book" method="POST">
+                                    <h3 class="p-2">+ Book Appointment</h3>
+                                    <div class="form-group">
+                                                <input name="name" type="text" class="form-control" placeholder="Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                                <input name="phone" type="text" class="form-control" placeholder="Phone Number" required>
+                                    </div>
+                                    <div class="form-group">
+                                                <input name="email" type="email" class="form-control" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                                <select name="doctor" class="form-control" id="exampleFormControlSelect1">
+                                                  <option value="any">Any Doctor</option>
+                                                  <option value="doctor1">Doctor 1</option>
+                                                  <option value="doctor2">Doctor 2</option>
+                                                  <option value="doctor3">Doctor 3</option>
+                                                  <option value="doctor4">Doctor 4</option>
+                                                </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+            </div>
+        </div>
+
+        <!-- <div id="portion5" class="container-fluid">
+          <div class="text-center mt-5"><i class="fas fa-user-md"></i></div>
+          <h3 class="text-center font-weight-bold pb-2 mb-3 mt-2">Our Team</h3>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card docs">
+                        <img src="images/doctor_01.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h3 class="card-text">Doctor 1</h3>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card docs">
+                        <img src="images/doctor_02.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h3 class="card-text">Doctor 2</h3>
+                        </div>
+                      </div>
+            </div>
+            <div class="col-md-4 mb-3"><div class="card docs">
+                <img src="images/doctor_03.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h3 class="card-text">Doctor 3</h3>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> -->
+
+        <div id="portion6" class="container-fluid">
+          <div class="row">
+            <div class="person col-md-6">
+              <div class="text-center mt-5"><i class="fas fa-map-marker-alt"></i></div>
+              <h3 class="text-center font-weight-bold pb-2 mb-3 mt-2">Location</h3>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.579630613854!2d31.341648514444916!3d30.10622332260783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145815e7cb507367%3A0x4aa62ac56513f5e5!2sPrime%20Dental%20Care%20Clinic!5e0!3m2!1sen!2seg!4v1570640540662!5m2!1sen!2seg" frameborder="0" style="border:0;" allowfullscreen=""></iframe>                        
+            </div>
+            <div class="person col-md-6">
+              <div class="text-center mt-5"><i class="fas fa-envelope"></i></div>
+              <h3 class="text-center font-weight-bold pb-2 mb-3 mt-2">Contact us</h3>
+              <form id="contact" class="p-5" method="post" action="/contact">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 mb-3">
+                    <input name="name" type="text" class="form-control" placeholder="Name" required>
+                  </div>
+                  <div class="col-sm-12 col-md-6 mb-3">
+                    <input name="email" type="email" class="form-control" placeholder="Email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 mb-3">
+                    <input name="phone" type="text" class="form-control" placeholder="Phone" required>
+                  </div>
+                  <div class="col-sm-12 col-md-6 mb-3">
+                    <input name="subject" type="text" class="form-control" placeholder="Subject" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <textarea name="message" class="form-control" rows="3" required>Message</textarea>
+                </div>
+                <div class="text-center"><button type="submit" class="btn btn-primary">Submit</button></div>
+              </form>
+            </div>        
+          </div>
+        </div>
+
+        
+
+<% include partials/footer%>
