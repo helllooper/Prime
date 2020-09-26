@@ -286,7 +286,7 @@ app.post("/admin", isLoggedIn, upload.single("image"), function(req, res){
                 
                     var mailOptions = {
                       to: emails,
-                      from:"sales@primedentalcare.org",
+                      from:"clinic@primedentalcare.org",
                       subject: req.body.subject,
                       html:
                       "<div><img style='max-width: 300px;' src='" + result.secure_url + "'></div>" + "\n\n" +
@@ -420,7 +420,7 @@ app.get("/contact", function(req, res){
     }))
 
     var mailOptions = {
-      to: "helllooper@gmail.com",
+      to: "clinic@primedentalcare.org",
       from: req.body.email,
       subject: req.body.subject,
       text: "Name: " + req.body.name + "\n\n" +
@@ -505,7 +505,7 @@ app.get("/contact", function(req, res){
 
         var mailOptions = {
           to: user.email,
-          from: 'emadsblog@gmail.com',
+          from: 'approvals@primedentalcare.org',
           subject: 'Prime Dental Care/Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -582,7 +582,7 @@ function(user, done) {
 }))
  var mailOptions = {
    to: user.email,
-   from: 'emadsblog@gmail.com',
+   from: 'approvals@primedentalcare.org',
    subject: 'Your password has been changed',
    text: 'Hello,\n\n' +
      'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
