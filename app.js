@@ -321,6 +321,7 @@ app.post("/book", function(req, res){
     req.body.name = req.sanitize(req.body.name);
     req.body.phone = req.sanitize(req.body.phone);
     req.body.email = req.sanitize(req.body.email);
+    req.body.date = Date.now();
     Booked.create(req.body, function(error, booked){
         if(error){
             req.flash("error", error.message);
