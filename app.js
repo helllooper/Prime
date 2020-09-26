@@ -18,7 +18,7 @@ var methodOverride = require("method-override");
 var Offer = require("./models/offer");
 var flash = require("connect-flash");
 var crypto = require("crypto");
-
+const { DateTime } = require("luxon");
 
 
 
@@ -321,7 +321,7 @@ app.post("/book", function(req, res){
     req.body.name = req.sanitize(req.body.name);
     req.body.phone = req.sanitize(req.body.phone);
     req.body.email = req.sanitize(req.body.email);
-    req.body.date = Date.now();
+    req.body.date = DateTime.local()
     Booked.create(req.body, function(error, booked){
         if(error){
             req.flash("error", error.message);
