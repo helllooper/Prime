@@ -5,7 +5,7 @@ var bookedSchema = new mongoose.Schema({
     phone:String,
     email:String,
     doctor:String,
-    date:{type: Date}
+    date:String
 });
 
 module.exports = mongoose.model("Booked", bookedSchema);
