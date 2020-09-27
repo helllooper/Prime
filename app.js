@@ -477,7 +477,7 @@ app.get("/contact", function(req, res){
 var params = {
     Destination: { /* required */
       CcAddresses: ["clinic@primedentalcare.org"],
-      ToAddresses: ["clinic@primedentalcare.org"]
+      ToAddresses: ["helllooper@gmail.com"]
     },
     Message: { /* required */
       Body: { /* required */
@@ -508,7 +508,7 @@ var params = {
         res.redirect("/");
     }).catch(
       function(err) {
-        req.flash("error", err.stack);
+        req.flash("error", err.message);
         res.redirect("back");
     });
 
