@@ -476,7 +476,7 @@ app.get("/contact", function(req, res){
 
 var params = {
     Destination: { /* required */
-      CcAddresses: ["clinic@primedentalcare.org"],
+      CcAddresses: [req.body.email],
       ToAddresses: ["clinic@primedentalcare.org"]
     },
     Message: { /* required */
