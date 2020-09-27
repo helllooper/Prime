@@ -19,9 +19,12 @@ var Offer = require("./models/offer");
 var flash = require("connect-flash");
 var crypto = require("crypto");
 const { DateTime } = require("luxon");
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRIDAPI)
-
+// const sgMail = require('@sendgrid/mail')
+// sgMail.setApiKey(process.env.SENDGRIDAPI)
+// Load the AWS SDK for Node.js
+var AWS = require('aws-sdk');
+// Set the region 
+AWS.config.update({region: 'us-east-1'});
 
 
 
@@ -446,26 +449,65 @@ app.get("/contact", function(req, res){
 
 
 
-const msg = {
-  to: 'clinic@primedentalcare.org',
-  from: 'clinic@primedentalcare.org',
-  subject: req.body.subject,
-  text: "Name: " + req.body.name + "\n\n" +
-        "Phone: " + req.body.phone + "\n\n" +
-        "Email: " + req.body.email + "\n\n" +
-        req.body.message
-}
+// const msg = {
+//   to: 'clinic@primedentalcare.org',
+//   from: 'clinic@primedentalcare.org',
+//   subject: req.body.subject,
+//   text: "Name: " + req.body.name + "\n\n" +
+//         "Phone: " + req.body.phone + "\n\n" +
+//         "Email: " + req.body.email + "\n\n" +
+//         req.body.message
+// }
 
-sgMail
-  .send(msg)
-  .then(() => {
+// sgMail
+//   .send(msg)
+//   .then(() => {
+//         req.flash("success", "Your message has been sent, Please wait for our email message")
+//         res.redirect("/");   
+//   })
+//   .catch((error) => {
+//         req.flash("error", error.message);
+//         res.redirect("back");
+//   })
+
+var params = {
+    Destination: { /* required */
+      CcAddresses: "clinic@primedentalcare.org",
+      ToAddresses: "clinic@primedentalcare.org"
+    },
+    Message: { /* required */
+      Body: { /* required */
+        Text: {
+         Charset: "UTF-8",
+         Data: "Name: " + req.body.name + "\n\n" +
+                 "Phone: " + req.body.phone + "\n\n" +
+                 "Email: " + req.body.email + "\n\n" +
+                 req.body.message
+        }
+       },
+       Subject: {
+        Charset: 'UTF-8',
+        Data: req.body.subject
+       }
+      },
+    Source: 'clinic@primedentalcare.org', /* required */
+    ReplyToAddresses: "clinic@primedentalcare.org",
+  };
+  
+  // Create the promise and SES service object
+  var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
+  
+  // Handle promise's fulfilled/rejected states
+  sendPromise.then(
+    function(data) {
         req.flash("success", "Your message has been sent, Please wait for our email message")
-        res.redirect("/");   
-  })
-  .catch((error) => {
-        req.flash("error", error.message);
+        res.redirect("/");
+    }).catch(
+      function(err) {
+        req.flash("error", err.stack);
         res.redirect("back");
-  })
+    });
+
  })
 
  app.delete("/admin/deleteAll", isLoggedIn, function(req, res){
