@@ -421,7 +421,7 @@ app.get("/contact", function(req, res){
     }))
 
     var mailOptions = {
-      to: "clinic@primedentalcare.org",
+      to: "approvals@primedentalcare.org",
       from: "clinic@primedentalcare.org",
       subject: req.body.subject,
       text: "Name: " + req.body.name + "\n\n" +
