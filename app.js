@@ -472,8 +472,8 @@ app.get("/contact", function(req, res){
 
 var params = {
     Destination: { /* required */
-      CcAddresses: "clinic@primedentalcare.org",
-      ToAddresses: "clinic@primedentalcare.org"
+      CcAddresses: ["clinic@primedentalcare.org"],
+      ToAddresses: ["clinic@primedentalcare.org"]
     },
     Message: { /* required */
       Body: { /* required */
@@ -491,7 +491,7 @@ var params = {
        }
       },
     Source: 'clinic@primedentalcare.org', /* required */
-    ReplyToAddresses: "clinic@primedentalcare.org",
+    ReplyToAddresses: ["clinic@primedentalcare.org"],
   };
   
   // Create the promise and SES service object
