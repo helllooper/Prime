@@ -19,7 +19,8 @@ var Offer = require("./models/offer");
 var flash = require("connect-flash");
 var crypto = require("crypto");
 const { DateTime } = require("luxon");
-
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRIDAPI)
 
 
 
@@ -414,34 +415,57 @@ app.get("/contact", function(req, res){
      req.body.phone = req.sanitize(req.body.phone);
      req.body.subject = req.sanitize(req.body.subject);
      req.body.message = req.sanitize(req.body.message);
-     const transporter = nodemailer.createTransport(sendgridTransport({
-        auth:{
-            api_key:process.env.SENDGRIDAPI
-        }
-    }))
+//      const transporter = nodemailer.createTransport(sendgridTransport({
+//         auth:{
+//             api_key:process.env.SENDGRIDAPI
+//         }
+//     }))
 
-    var mailOptions = {
-      to: "approvals@primedentalcare.org",
-      from: "clinic@primedentalcare.org",
-      subject: req.body.subject,
-      text: "Name: " + req.body.name + "\n\n" +
-            "Phone: " + req.body.phone + "\n\n" +
-            "Email: " + req.body.email + "\n\n" +
-            req.body.message
-    };
+//     var mailOptions = {
+//       to: "approvals@primedentalcare.org",
+//       from: "clinic@primedentalcare.org",
+//       subject: req.body.subject,
+//       text: "Name: " + req.body.name + "\n\n" +
+//             "Phone: " + req.body.phone + "\n\n" +
+//             "Email: " + req.body.email + "\n\n" +
+//             req.body.message
+//     };
 
-    transporter.sendMail(mailOptions, function(err) {
-      if(err){
-        req.flash("error", err.message);
+//     transporter.sendMail(mailOptions, function(err) {
+//       if(err){
+//         req.flash("error", err.message);
+//         res.redirect("back");
+//       }
+//       else {
+//           req.flash("success", "Your message has been sent, Please wait for our email message")
+//           res.redirect("/");
+//       }
+
+
+//     });
+
+
+
+const msg = {
+  to: 'clinic@primedentalcare.org',
+  from: 'clinic@primedentalcare.org',
+  subject: req.body.subject,
+  text: "Name: " + req.body.name + "\n\n" +
+        "Phone: " + req.body.phone + "\n\n" +
+        "Email: " + req.body.email + "\n\n" +
+        req.body.message
+}
+
+sgMail
+  .send(msg)
+  .then(() => {
+        req.flash("success", "Your message has been sent, Please wait for our email message")
+        res.redirect("/");   
+  })
+  .catch((error) => {
+        req.flash("error", error.message);
         res.redirect("back");
-      }
-      else {
-          req.flash("success", "Your message has been sent, Please wait for our email message")
-          res.redirect("/");
-      }
-
-
-    });
+  })
  })
 
  app.delete("/admin/deleteAll", isLoggedIn, function(req, res){
