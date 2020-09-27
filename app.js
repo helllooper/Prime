@@ -24,7 +24,11 @@ const { DateTime } = require("luxon");
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Set the region 
-AWS.config.update({region: 'us-east-1'});
+AWS.config.update({
+    accessKeyId:"AKIAJULIZKMV3MDTRI6Q",
+secretAccessKey:"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",
+    region: 'us-east-1'
+});
 
 
 
