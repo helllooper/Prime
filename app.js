@@ -422,10 +422,11 @@ app.get("/contact", function(req, res){
 
     var mailOptions = {
       to: "clinic@primedentalcare.org",
-      from: req.body.email,
+      from: "clinic@primedentalcare.org",
       subject: req.body.subject,
       text: "Name: " + req.body.name + "\n\n" +
-            "Phone: " + req.body.phone + "\n\n" + 
+            "Phone: " + req.body.phone + "\n\n" +
+            "Email: " + req.body.email + "\n\n" +
             req.body.message
     };
 
