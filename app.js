@@ -79,7 +79,7 @@ cloudinary.config({
 };
 var limitOption =
     {fieldSize: 1000000000, fileSize: 1000000000};
-var upload = multer({ storage: storage, limits:limitOption, fileFilter:imageFilter});
+var upload = multer({ storage: storage, fileFilter:imageFilter});
 
 
 
