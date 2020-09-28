@@ -300,7 +300,7 @@ app.post("/admin", isLoggedIn, upload.single("image"), function(req, res){
                       "<div><img style='max-width: 300px;' src='" + result.secure_url + "'></div>" + "\n\n" +
                       req.body.message + "\n\n" +
                       "<p>You're receiving this email because you're a valued member of prime dental care clinic.To stop receiving emails , please click the link below</p>" + "\n\n" + 
-                      "<a href='https://ancient-woodland-15359.herokuapp.com/unsubscribe'>Click here to unsubscribe</a>"
+                      "<a href='https://www.primedentalcare.org/unsubscribe'>Click here to unsubscribe</a>"
                     };
                 
                     transporter.sendMail(mailOptions, function(errr) {
