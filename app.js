@@ -34,7 +34,7 @@ secretAccessKey:"JGEnHTVeK/uDD8oI5mss4988WLOa+4oyHkwsZrNX",
 
 
 app.use(flash());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', parameterLimit:50000, extended: true}));
 app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
