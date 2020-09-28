@@ -19,8 +19,8 @@ var Offer = require("./models/offer");
 var flash = require("connect-flash");
 var crypto = require("crypto");
 const { DateTime } = require("luxon");
-// const sgMail = require('@sendgrid/mail')
-// sgMail.setApiKey(process.env.SENDGRIDAPI)
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRIDAPI)
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Set the region 
@@ -286,35 +286,56 @@ app.post("/admin", isLoggedIn, upload.single("image"), function(req, res){
                 else {
                     const map = docs.map(doc => doc.email);
                     const emails = map.join();
-                    const transporter = nodemailer.createTransport(sendgridTransport({
-                        auth:{
-                            api_key:process.env.SENDGRIDAPI
-                        }
-                    }))
+                    // const transporter = nodemailer.createTransport(sendgridTransport({
+                    //     auth:{
+                    //         api_key:process.env.SENDGRIDAPI
+                    //     }
+                    // }))
                 
-                    var mailOptions = {
-                      to: emails,
-                      from:"clinic@primedentalcare.org",
-                      subject: req.body.subject,
-                      html:
-                      "<div><img style='max-width: 300px;' src='" + result.secure_url + "'></div>" + "\n\n" +
-                      req.body.message + "\n\n" +
-                      "<p>You're receiving this email because you're a valued member of prime dental care clinic.To stop receiving emails , please click the link below</p>" + "\n\n" + 
-                      "<a href='https://ancient-woodland-15359.herokuapp.com/unsubscribe'>Click here to unsubscribe</a>"
-                    };
+                    // var mailOptions = {
+                    //   to: emails,
+                    //   from:"clinic@primedentalcare.org",
+                    //   subject: req.body.subject,
+                    //   html:
+                    //   "<div><img style='max-width: 300px;' src='" + result.secure_url + "'></div>" + "\n\n" +
+                    //   req.body.message + "\n\n" +
+                    //   "<p>You're receiving this email because you're a valued member of prime dental care clinic.To stop receiving emails , please click the link below</p>" + "\n\n" + 
+                    //   "<a href='https://ancient-woodland-15359.herokuapp.com/unsubscribe'>Click here to unsubscribe</a>"
+                    // };
                 
-                    transporter.sendMail(mailOptions, function(errr) {
-                      if(errr){
-                        req.flash("error", errr.message);
-                        res.redirect("back");
-                      }
-                      else {
-                          req.flash("success", "A message has been sent to all subscribed emails")
-                          res.redirect("/admin");
-                      }
+                    // transporter.sendMail(mailOptions, function(errr) {
+                    //   if(errr){
+                    //     req.flash("error", errr.message);
+                    //     res.redirect("back");
+                    //   }
+                    //   else {
+                    //       req.flash("success", "A message has been sent to all subscribed emails")
+                    //       res.redirect("/admin");
+                    //   }
                 
                 
-                    });
+                    // });
+
+                    const msg = {
+                    to: emails,
+                    from: 'clinic@primedentalcare.org',
+                    subject: req.body.subject,
+                    html: "<div><img style='max-width: 300px;' src='" + result.secure_url + "'></div>" + "\n\n" +
+                        req.body.message + "\n\n" +
+                        "<p>You're receiving this email because you're a valued member of prime dental care clinic.To stop receiving emails , please click the link below</p>" + "\n\n" + 
+                        "<a href='https://ancient-woodland-15359.herokuapp.com/unsubscribe'>Click here to unsubscribe</a>"
+                    }
+
+sgMail
+  .send(msg)
+  .then(() => {
+    req.flash("success", "A message has been sent to all subscribed emails")
+    res.redirect("/admin");   
+  })
+  .catch((error) => {
+    req.flash("error", error.message);
+    res.redirect("back");
+  })
         
                 }
             })
