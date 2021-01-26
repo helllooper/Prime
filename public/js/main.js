@@ -1,6 +1,6 @@
-// $(window).on('load', function () {
-//     $("#preload").fadeOut(3000);
-// });
+$(window).on('load', function () {
+    $("#preload").fadeOut(3000);
+});
 
 var aboutlist = $(".about-list");
 var tl4 = new TimelineLite();
